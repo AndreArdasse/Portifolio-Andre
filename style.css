@@ -430,6 +430,7 @@
   .si-js   { background: rgba(241,224,90,0.12); color: #c9b700; }
   .si-py   { background: rgba(55,118,171,0.15); color: var(--accent); }
   .si-git  { background: rgba(240,80,51,0.12); color: #f05033; }
+  .si-sql  { background: rgba(38,77,228,0.15); color: #264ed4; }
   .skill-name {
     font-family: var(--mono); font-size: 13px; font-weight: 700;
     color: var(--text); letter-spacing: 0.04em;
