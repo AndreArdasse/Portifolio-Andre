@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>André Lima — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<style>
+   :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161f;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(99,179,237,0.35);
+    --text: #e8e8f0;
+    --muted: #7a7a9a;
+    --accent: #63b3ed;
+    --accent2: #9f7aea;
+    --accent3: #68d391;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --nav-h: 64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+ 
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 1rem;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links {
+    display: flex; gap: 2px; list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 5px 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent);
+    border-color: var(--border-accent);
+    background: rgba(99,179,237,0.06);
+  }
+ 
+  /* ── SECTIONS ── */
+  section {
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 2.5rem) 1.25rem 3rem;
+    display: flex; align-items: center;
+  }
+  section:nth-child(even) { background: var(--bg2); }
+  .section-inner { width: 100%; max-width: 900px; margin: 0 auto; }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  h1, h2 {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.4rem; margin-bottom: 2rem; }
+  p { color: var(--muted); margin-bottom: 1rem; }
+  strong { color: var(--text); font-weight: 500; }
+ 
+  /* ── HERO ── */
+  #hero { min-height: 100vh; position: relative; overflow: hidden; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-greeting {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-name {
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+    margin-bottom: 1rem;
+  }
+  .hero-name span { color: var(--accent2); }
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    line-height: 1.8;
+  }
+  .hero-desc {
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+    max-width: 500px;
+  }
+  .hero-cta {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 1s forwards;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-outline { background: transparent; color: var(--accent); }
+  .btn-outline:hover { background: rgba(99,179,237,0.1); }
+ 
+  /* Avatar — oculto em mobile, visível em desktop */
+  .avatar-wrap {
+    display: none;
+  }
+  .avatar-ring {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 2px solid var(--border-accent);
+    padding: 6px;
+    background: var(--bg3);
+    position: relative;
+  }
+  .avatar-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg3) 0%, #1a1a2e 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -2px;
+    cursor: pointer;
+    position: relative;
+    transition: filter 0.2s;
+  }
+  .avatar-inner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  .avatar-overlay {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: rgba(10,10,15,0.65);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .avatar-inner:hover .avatar-overlay { opacity: 1; }
+  .avatar-overlay-icon {
+    font-size: 1.4rem;
+  }
+  .avatar-overlay-text {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .avatar-dot {
+    position: absolute; bottom: 12px; right: 12px;
+    width: 14px; height: 14px;
+    background: var(--accent3);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+  }
+  /* label de upload invisível mas cobre o avatar */
+  .avatar-upload-label {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+  }
+  #avatar-input { display: none; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent3);
+    border: 1px solid rgba(104,211,145,0.25);
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .pulse {
+    width: 6px; height: 6px;
+    background: var(--accent3);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+ 
+  /* ── ABOUT GRID ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+  .card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .card h3 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .lang-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.75rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+  .tag-blue   { background: rgba(99,179,237,0.1); color: var(--accent); border: 1px solid rgba(99,179,237,0.2); }
+  .tag-green  { background: rgba(104,211,145,0.1); color: var(--accent3); border: 1px solid rgba(104,211,145,0.2); }
+  .tag-purple { background: rgba(159,122,234,0.1); color: var(--accent2); border: 1px solid rgba(159,122,234,0.2); }
+  .tag-amber  { background: rgba(246,173,85,0.1); color: #f6ad55; border: 1px solid rgba(246,173,85,0.2); }
+ 
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .edu-card h3 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .edu-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-top: 1rem;
+  }
+  .subject-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .subject-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+ 
+  /* ── SKILLS / TECH ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+  .skill-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .skill-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .si-html { background: rgba(227,76,38,0.15); color: #e34c26; }
+  .si-css  { background: rgba(38,77,228,0.15); color: #264ed4; }
+  .si-java { background: rgba(240,152,42,0.15); color: #f0982a; }
+  .si-js   { background: rgba(241,224,90,0.12); color: #c9b700; }
+  .si-py   { background: rgba(55,118,171,0.15); color: var(--accent); }
+  .si-git  { background: rgba(240,80,51,0.12); color: #f05033; }
+  .skill-name {
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    color: var(--text); letter-spacing: 0.04em;
+  }
+  .skill-sub { font-size: 12px; color: var(--muted); }
+  .skill-bar-wrap {
+    height: 4px; background: rgba(255,255,255,0.06);
+    border-radius: 2px; margin: 0.75rem 0 0.5rem; overflow: hidden;
+  }
+  .skill-bar {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .skill-status {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .status-learning { color: var(--accent3) !important; }
+  .status-planned  { color: #f6ad55 !important; }
+  .status-done     { color: var(--accent) !important; }
+ 
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none; color: inherit;
+  }
+  .project-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+  .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .project-icon { font-family: var(--mono); font-size: 1.5rem; color: var(--accent); }
+  .project-link-icon {
+    font-size: 14px; color: var(--muted); opacity: 0.6;
+    font-family: var(--mono);
+  }
+  .project-card:hover .project-link-icon { opacity: 1; color: var(--accent); }
+  .project-card h3 {
+    font-family: var(--mono); font-size: 14px; font-weight: 700;
+    color: var(--text); margin-bottom: 0.5rem;
+  }
+  .project-card p { font-size: 13px; margin-bottom: 1rem; flex: 1; }
+  .project-techs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: var(--bg3);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+  }
+  .empty-state p { font-family: var(--mono); font-size: 13px; }
+  .gh-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px;
+    color: var(--accent);
+    border: 1px solid var(--border-accent);
+    padding: 10px 20px; border-radius: 6px;
+    text-decoration: none; margin-top: 2rem;
+    transition: background 0.2s;
+  }
+  .gh-link:hover { background: rgba(99,179,237,0.08); }
+ 
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    min-height: 80px;
+  }
+  .contact-btn:hover {
+    border-color: var(--border-accent);
+    background: rgba(99,179,237,0.04);
+    transform: translateY(-3px);
+  }
+  .contact-btn-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .ci-email    { background: rgba(99,179,237,0.12); }
+  .ci-linkedin { background: rgba(10,102,194,0.18); }
+  .ci-github   { background: rgba(255,255,255,0.07); }
+  .ci-whatsapp { background: rgba(37,211,102,0.14); }
+  .contact-btn-body {
+    display: flex; flex-direction: column; gap: 4px;
+    min-width: 0; flex: 1;
+  }
+  .contact-btn-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .contact-btn-value {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .contact-btn-arrow {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--muted);
+    opacity: 0.35;
+    flex-shrink: 0;
+    transition: opacity 0.2s, color 0.2s, transform 0.2s;
+  }
+  .contact-btn:hover .contact-btn-arrow {
+    opacity: 1;
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+ 
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2rem 1rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  footer span { color: var(--accent); }
+ 
+  /* ── BG DECORATION ── */
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(99,179,237,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,179,237,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  section { position: relative; z-index: 1; }
+  nav { z-index: 100; }
+ 
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+ 
+  /* ── TABLET (≥ 600px) ── */
+  @media (min-width: 600px) {
+    nav { padding: 0 2rem; }
+    .nav-links a { font-size: 11px; padding: 6px 12px; gap: 4px; }
+    section { padding: calc(var(--nav-h) + 3rem) 2.5rem 3.5rem; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); }
+ 
+    .about-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .subjects-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .edu-card { padding: 1.5rem 1.75rem; }
+    .status-badge { font-size: 11px; }
+  }
+ 
+  /* ── DESKTOP (≥ 900px) ── */
+  @media (min-width: 900px) {
+    nav { padding: 0 clamp(1rem, 5vw, 4rem); }
+    .nav-links { gap: 8px; }
+    .nav-links a { font-size: 12px; padding: 6px 14px; letter-spacing: 0.05em; }
+    section { padding: calc(var(--nav-h) + 4rem) clamp(1rem, 8vw, 8rem) 4rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+ 
+    .hero-grid { grid-template-columns: 1fr auto; gap: 4rem; }
+    .avatar-wrap {
+      display: block;
+      opacity: 0;
+      animation: fadeIn 0.8s 0.5s forwards;
+      flex-shrink: 0;
+    }
+    .hero-role { font-size: clamp(0.85rem, 1.5vw, 1rem); }
+    .btn { font-size: 12px; padding: 10px 22px; }
+ 
+    .about-grid { gap: 1.5rem; }
+    .card { padding: 1.5rem; }
+ 
+    .edu-card { padding: 1.5rem 2rem; }
+    .subjects-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+ 
+    .skills-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card { padding: 1.5rem; }
+ 
+    .projects-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .project-card { padding: 1.5rem; }
+ 
+    .status-badge { font-size: 11px; }
+    footer { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">andré.lima<span style="color:var(--muted)">_</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">início</a></li>
+    <li><a href="#sobre">sobre</a></li>
+    <li><a href="#educacao">educação</a></li>
+    <li><a href="#tecnologias">tecnologias</a></li>
+    <li><a href="#projetos">projetos</a></li>
+     <li><a href="#contato">contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid section-inner">
+    <div>
+      <p class="hero-greeting">// olá, mundo</p>
+      <h1 class="hero-name">André<br/><span>Ardasse</span></h1>
+      <div class="hero-role">
+        Estudante de Análise e Desenvolvimento de Sistemas<br/>
+        Universidade Veiga de Almeida — Cabo Frio — Rio de Janeiro
+      </div>
+      <p class="hero-desc">
+        Apaixonado por tecnologia e em construção constante. Explorando o universo do desenvolvimento de software com foco em aprendizado sólido e prática contínua.
+      </p>
+      <div class="hero-cta">
+        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+        <a href="#sobre" class="btn btn-outline">Sobre mim</a>
+      </div>
+      <div class="status-badge" style="margin-top:2rem;">
+        <div class="pulse"></div>
+        Disponível para oportunidades de emprego
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar-inner">AA</div>
+        <div class="avatar-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <p class="section-tag">// 01 — sobre mim</p>
+    <h2>Quem sou eu?</h2>
+    <p style="max-width:600px; margin-bottom:2rem;">
+      Sou <strong>André Ardasse Monteiro Lima</strong>, estudante de Análise e Desenvolvimento de Sistemas. Meu objetivo é construir uma carreira sólida na área de tecnologia, com foco em desenvolvimento de software. Acredito que o aprendizado contínuo é a base de tudo — seja dentro da universidade ou em cursos independentes.
+    </p>
+
+    <div class="about-grid">
+
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Objetivo</h3>
+        <p style="font-size:14px;">Tornar-me desenvolvedor de software, com domínio de múltiplas linguagens e tecnologias. Busco minha primeira oportunidade para colocar em prática o que estudo.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌍</div>
+        <h3>Idiomas</h3>
+        <p style="font-size:14px;">Comunicação fluida em dois idiomas, o que expande meu acesso a documentações, cursos e materiais técnicos do mundo todo.</p>
+        <div class="lang-tags">
+          <span class="tag tag-green">🇧🇷 Português — Nativo</span>
+          <span class="tag tag-blue">🇺🇸 English — Avançado</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <h3>Localização</h3>
+        <p style="font-size:14px;">Rio de Janeiro, Brasil. Estudando presencialmente na Universidade Veiga de Almeida e acompanhando o ecossistema tech local e global.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Próximos passos</h3>
+        <p style="font-size:14px;">Expandir o portfólio com projetos práticos, aprofundar conhecimentos em Java e iniciar estudos em JavaScript e Python.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCAÇÃO -->
+<section id="educacao">
+  <div class="section-inner">
+    <p class="section-tag">// 02 — formação</p>
+    <h2>Educação & Cursos</h2>
+
+    <!-- UVA -->
+    <div class="edu-card">
+      <div class="edu-meta">🎓 Graduação em andamento · Universidade Veiga de Almeida</div>
+      <h3>Análise e Desenvolvimento de Sistemas — ADS</h3>
+      <p style="font-size:14px; margin-top:0.5rem;">Curso superior tecnológico voltado para a análise, projeto, desenvolvimento e gestão de sistemas de software. Forma profissionais para atuar em toda a cadeia do desenvolvimento de soluções tecnológicas.</p>
+
+      <p style="font-size:13px; color:var(--accent); font-family:var(--mono); margin-top:1.5rem; margin-bottom:0.5rem; letter-spacing:0.06em;">DISCIPLINAS PREVISTAS NA GRADE CURRICULAR</p>
+      <div class="subjects-grid">
+        <div class="subject-item"><div class="subject-dot"></div>Algoritmos e Lógica</div>
+        <div class="subject-item"><div class="subject-dot"></div>Estrutura de Dados</div>
+        <div class="subject-item"><div class="subject-dot"></div>Programação Orientada a Objetos</div>
+        <div class="subject-item"><div class="subject-dot"></div>Banco de Dados</div>
+        <div class="subject-item"><div class="subject-dot"></div>Engenharia de Software</div>
+        <div class="subject-item"><div class="subject-dot"></div>Redes de Computadores</div>
+        <div class="subject-item"><div class="subject-dot"></div>Sistemas Operacionais</div>
+        <div class="subject-item"><div class="subject-dot"></div>Desenvolvimento Web</div>
+        <div class="subject-item"><div class="subject-dot"></div>Segurança da Informação</div>
+        <div class="subject-item"><div class="subject-dot"></div>Gerenciamento de Projetos</div>
+        <div class="subject-item"><div class="subject-dot"></div>Computação em Nuvem</div>
+        <div class="subject-item"><div class="subject-dot"></div>Inteligência Artificial</div>
+      </div>
+    </div>
+
+    <!-- HTML & CSS -->
+    <div class="edu-card" style="border-left-color: var(--accent2);">
+      <div class="edu-meta" style="color:var(--accent2);">📜 Certificado Concluído · Curso em Vídeo</div>
+      <h3>HTML e CSS — Gustavo Guanabara</h3>
+      <p style="font-size:14px; margin-top:0.5rem;">Curso completo de HTML5 e CSS3 ministrado pelo professor Gustavo Guanabara no <strong>Curso em Vídeo</strong>. Conteúdo abrangente cobrindo desde fundamentos até técnicas modernas de estilização, responsividade e boas práticas de estruturação de páginas web.</p>
+      <div class="lang-tags" style="margin-top:1rem;">
+        <span class="tag tag-blue">HTML5</span>
+        <span class="tag tag-purple">CSS3</span>
+        <span class="tag tag-green">Responsividade</span>
+        <span class="tag tag-amber">Boas práticas</span>
+      </div>
+    </div>
+
+    <!-- Java -->
+    <div class="edu-card" style="border-left-color: var(--accent3);">
+      <div class="edu-meta" style="color:var(--accent3);">📚 Estudando por conta própria · Cursos Gratuitos</div>
+      <h3>Java — Aprendizado Independente</h3>
+      <p style="font-size:14px; margin-top:0.5rem;">Estudando Java de forma autônoma por meio de cursos gratuitos disponíveis online. Explorando POO, lógica de programação e desenvolvimento de aplicações com foco em construir uma base técnica sólida antes de avançar para outras linguagens.</p>
+      <div class="lang-tags" style="margin-top:1rem;">
+        <span class="tag tag-amber">Java</span>
+        <span class="tag tag-green">POO</span>
+        <span class="tag tag-blue">Lógica de programação</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECNOLOGIAS -->
+<section id="tecnologias">
+  <div class="section-inner">
+    <p class="section-tag">// 03 — tecnologias</p>
+    <h2>Stack & Habilidades</h2>
+    <p style="margin-bottom:2rem; max-width:500px;">Minhas tecnologias atuais e o roteiro de aprendizado para os próximos passos.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-html">HTML</div>
+          <div>
+            <div class="skill-name">HTML5</div>
+            <div class="skill-sub">Marcação semântica</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+        <div class="skill-status status-done">✓ Curso completo — Guanabara</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-css">CSS</div>
+          <div>
+            <div class="skill-name">CSS3</div>
+            <div class="skill-sub">Estilização & layout</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+        <div class="skill-status status-done">✓ Curso completo — Guanabara</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-java">Java</div>
+          <div>
+            <div class="skill-name">Java</div>
+            <div class="skill-sub">POO & lógica</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:45%; background: linear-gradient(90deg,var(--accent3),#9f7aea)"></div></div>
+        <div class="skill-status status-learning">⟳ Em aprendizado — cursos gratuitos</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-js">JS</div>
+          <div>
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-sub">Front-end & lógica</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:10%; background: linear-gradient(90deg,#c9b700,#f6ad55)"></div></div>
+        <div class="skill-status status-planned">◎ Próxima linguagem planejada</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-py">Py</div>
+          <div>
+            <div class="skill-name">Python</div>
+            <div class="skill-sub">Scripts & back-end</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:10%; background: linear-gradient(90deg,var(--accent),var(--accent2))"></div></div>
+        <div class="skill-status status-planned">◎ No roteiro de estudos</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <div class="skill-icon si-git">Git</div>
+          <div>
+            <div class="skill-name">Git & GitHub</div>
+            <div class="skill-sub">Versionamento</div>
+          </div>
+        </div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:50%"></div></div>
+        <div class="skill-status status-learning">⟳ Utilizando no dia a dia</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="section-inner">
+    <p class="section-tag">// 04 — portfólio</p>
+    <h2>Projetos</h2>
+    <p style="max-width:500px; margin-bottom:2rem;">Projetos práticos desenvolvidos durante os estudos. Os links abrem diretamente no GitHub.</p>
+
+    <div class="projects-grid">
+
+      <!-- Placeholder 1 -->
+      <div class="empty-state">
+        <p style="color:var(--muted); margin-bottom:0.5rem;">🚧 Projetos em construção</p>
+        <p style="font-size:12px; color: var(--muted); opacity:0.6;">
+          Seus projetos aparecerão aqui com links diretos ao GitHub.<br/>
+          Substitua este bloco pelos seus repositórios.
+        </p>
+      </div>
+
+      <!--
+        MODELO para adicionar projetos:
+
+        <a href="https://github.com/seu-usuario/nome-do-repo" target="_blank" class="project-card">
+          <div class="project-top">
+            <div class="project-icon">📁</div>
+            <div class="project-link-icon">↗</div>
+          </div>
+          <h3>Nome do Projeto</h3>
+          <p>Descrição breve do que o projeto faz e quais problemas resolve.</p>
+          <div class="project-techs">
+            <span class="tag tag-blue">HTML</span>
+            <span class="tag tag-purple">CSS</span>
+          </div>
+        </a>
+
+      -->
+
+    </div>
+
+    <a href="https://github.com/ArdasseAndre/Portif-lio-AndreArdasse" target="_blank" class="gh-link">
+      ↗ Visitar GitHub
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-inner">
+    <p class="section-tag">// 05 — contato</p>
+    <h2>Entre em Contato</h2>
+    <p style="max-width:520px; margin-bottom:0;">
+      Estou disponível para oportunidades de estágio e colaborações. Fique à vontade para me chamar por qualquer um dos canais abaixo.
+    </p>
+ 
+    <div class="contact-grid">
+ 
+      <a href="https://mail.google.com/mail/u/0/#inbox?compose=jrjtXLFHRKskzjwqNFXtGGPMRvhsQRNPKpRGBBBTkTLwbdRRjhcgZWmNzfMTRFLhgwXKXKdL" class="contact-btn" target="_blank" rel="noopener">
+        <div class="contact-btn-icon ci-email">📧</div>
+        <div class="contact-btn-body">
+          <span class="contact-btn-label">Email</span>
+          <span class="contact-btn-value">andreardasse15@gmail.com</span>
+        </div>
+        <span class="contact-btn-arrow">↗</span>
+      </a>
+ 
+      <a href="https://www.linkedin.com/in/andreardasse/" target="_blank" rel="noopener" class="contact-btn">
+        <div class="contact-btn-icon ci-linkedin">💼</div>
+        <div class="contact-btn-body">
+          <span class="contact-btn-label">LinkedIn</span>
+          <span class="contact-btn-value">linkedin.com/in/andreardasse</span>
+        </div>
+        <span class="contact-btn-arrow">↗</span>
+      </a>
+ 
+      <a href="https://github.com/ArdasseAndre" target="_blank" rel="noopener" class="contact-btn">
+        <div class="contact-btn-icon ci-github">🐙</div>
+        <div class="contact-btn-body">
+          <span class="contact-btn-label">GitHub</span>
+          <span class="contact-btn-value">github.com/ArdasseAndre</span>
+        </div>
+        <span class="contact-btn-arrow">↗</span>
+      </a>
+ 
+      <a href="https://wa.me/5522997287452" target="_blank" rel="noopener" class="contact-btn">
+        <div class="contact-btn-icon ci-whatsapp">💬</div>
+        <div class="contact-btn-body">
+          <span class="contact-btn-label">WhatsApp</span>
+          <span class="contact-btn-value">(22) 99728-7452</span>
+        </div>
+        <span class="contact-btn-arrow">↗</span>
+      </a>
+ 
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Desenvolvido por <span>André Ardasse Monteiro Lima</span> · ADS — Universidade Veiga de Almeida</p>
+  <p style="margin-top:4px; opacity:0.5;">HTML · CSS · Em constante evolução</p>
+</footer>
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
