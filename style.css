@@ -62,6 +62,75 @@
     border-color: var(--border-accent);
     background: rgba(99,179,237,0.06);
   }
+/* Esconde o hambúrguer por padrão (Desktop) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 101; /* Fica acima do menu aberto */
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background-color: var(--muted);
+  margin: 4px 0;
+  transition: all 0.2s ease;
+}
+
+/* Regras para Telas Mobile (Abaixo de 768px) */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Mostra o botão no mobile */
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    /* Posicionamento do menu lateral/suspenso */
+    position: fixed;
+    top: 0;
+    right: -100%; /* Começa escondido na direita */
+    width: 200px; /* Largura sutil pro menu */
+    height: 100vh;
+    padding: calc(var(--nav-h) + 1.5rem) 1.5rem 1.5rem 1.5rem;
+    
+    /* Mantendo a identidade visual do seu projeto */
+    background: rgba(10, 10, 15, 0.95); 
+    backdrop-filter: blur(12px);
+    border-left: 1px solid var(--border);
+    transition: right 0.3s ease;
+  }
+
+  /* Quando o menu estiver ativo, ele desliza para a tela */
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links a {
+    display: block;
+    font-size: 11px; /* Um pouquinho maior no mobile para facilitar o toque */
+    padding: 8px 12px;
+  }
+
+  /* Animação do Hambúrguer virando "X" */
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+    background-color: var(--accent);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+    background-color: var(--accent);
+  }
+}
  
   /* ── SECTIONS ── */
   section {
@@ -433,11 +502,14 @@
  
   /* ── CONTACT ── */
   .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;          /* Espaçamento vertical entre os cards */
+  width: 100%;        /* Ocupa a largura total disponível */
+  padding: 0 1rem;    /* Adiciona margem interna nas laterais para não encostar na borda da tela */
+  box-sizing: border-box; /* Garante que o padding não aumente o tamanho final do container */
+}
+    
   .contact-btn {
     display: flex;
     align-items: center;
